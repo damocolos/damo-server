@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const port = process.env.PORT || 5000;
 
-const url = 'http://localhost:3000/';
+const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
 
 const storage = multer.diskStorage({

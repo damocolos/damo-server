@@ -4,7 +4,7 @@ const gm = require('gm');
 const fs = require('fs'); // To clean up after the we generate the output image file
 const width = 300;
 const height = 400;
-const url = 'http://localhost:3000/';
+const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
 const Jimp = require("jimp");
 
