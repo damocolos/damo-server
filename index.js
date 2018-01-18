@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const port = process.env.PORT || 5000;
 
 const url = 'http://localhost:3000/';
 const uploadPath = 'uploads/';
@@ -95,5 +96,5 @@ app.use('/image', imageRoute);
 // 	});
 // })
 
-app.listen(3000);
-console.log('running on port 3000');
+app.listen(port);
+console.log('running on port ' + port);
