@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
@@ -39,6 +39,7 @@ app.use((req, res, next)=>{
 Article = require('./api/models/articles-models');
 const articleRoute = require('./api/routes/articles-routes');
 const imageRoute = require('./api/routes/image-routes');
+const userRoute = require('./api/routes/user-routes');
 
 // connect mongodb
 mongoose.connect(
@@ -56,6 +57,7 @@ app.get('/', function(req, res) {
 });
 
 app.use('/api/articles', articleRoute);
+app.use('/user', userRoute);
 app.use('/image', imageRoute);
 
 // app.get('/api/articles', function(req,res){

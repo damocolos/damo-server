@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const auth = require('../middleware/auth');
 
 const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
@@ -19,8 +20,8 @@ const upload = multer({
 	storage: storage
 });
 
-router.get('/', function(req,res){
-	Article.getArticles(function(err, articles){
+router.get('/', auth, (req,res) => {
+	Article.getArticles((err, articles) => {
 		if(err){ 
 			// console.log(err);
 			// res.json(err);
