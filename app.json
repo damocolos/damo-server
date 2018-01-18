@@ -1,0 +1,7 @@
+{
+	"name": "Node js Express",
+	"description": "testing",
+	"repository": "https://github.com/damocolos/damo-server",
+	"keywords": ["node", "express"],
+	"image": "heroku/nodejs"
+}
