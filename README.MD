@@ -4,19 +4,22 @@ server for testing only
 
 ## Installing
 
-### Step 1
 ```
 npm instal i
 ```
-### Step 2
-```
 
+```
+node index.js
+```
+or
+```
+nodemon index.js
 ```
 
 ## Demo
 
-* [Click This](https://damo-express-server.herokuapp.com)
+* [Heroku Free](https://damo-express-server.herokuapp.com)
 
 ## Doc
 
-* [Click This](https://damo-express-server.herokuapp.com)
+* [Postman Docs](https://documenter.getpostman.com/view/2031323/damo-server/7TJDYvk)
