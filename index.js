@@ -55,9 +55,9 @@ mongoose.Promise = global.Promise;
 
 app.get('/', function(req, res) {
 	res.status(200).json({
-		name: 'DAMO SERVER',
-		version: 1.0.0,
-		framework: 'express'
+		name: "DAMO SERVER",
+		version: "1.0.0",
+		framework: "express"
 	});
 });
 
