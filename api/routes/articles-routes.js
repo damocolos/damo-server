@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 const auth = require('../middleware/auth');
+const Article = require('../models/articles-models');
 
 const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
