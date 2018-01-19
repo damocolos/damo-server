@@ -58,4 +58,20 @@ router.post('/', upload.single('imageFile'), (req, res, next) => {
 	});
 });
 
+router.delete('/:id', (req, res, next) => {
+	Article.remove({ _id: req.params.id })
+		.exec()
+		.then( result => {
+			res.status(200).json({
+				message: "article deleted"
+			});
+		})
+		.catch( err => {
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
+
 module.exports = router;
