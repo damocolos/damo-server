@@ -41,7 +41,7 @@ router.get('/', auth, (req,res) => {
 	// mongoose.articles.find();
 })
 
-router.post('/', upload.single('imageFile'), (req, res, next) => {
+router.post('/', auth, upload.single('imageFile'), (req, res, next) => {
 	console.log("request file", req.file);
 	const article = new Article({
 		_id: new mongoose.Types.ObjectId(),
@@ -59,7 +59,7 @@ router.post('/', upload.single('imageFile'), (req, res, next) => {
 	});
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', auth, (req, res, next) => {
 	Article.remove({ _id: req.params.id })
 		.exec()
 		.then( result => {
