@@ -30,6 +30,7 @@ router.get('/', auth, (req,res) => {
 		res.status(200).json(
 			articles.map(data => {
 				return {
+					_id: data._id,
 					title: data.title,
 					image: data.image,
 					image_path: url + uploadPath + data.image,
