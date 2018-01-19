@@ -5,6 +5,12 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const port = process.env.PORT || 3000;
 
+// define route
+const articleRoute = require('./api/routes/articles-routes');
+const imageRoute = require('./api/routes/image-routes');
+const userRoute = require('./api/routes/user-routes');
+
+// domain url
 const url = 'https://damo-express-server.herokuapp.com/';
 const uploadPath = 'uploads/';
 
@@ -36,67 +42,30 @@ app.use((req, res, next)=>{
 	next();
 });
 
-Article = require('./api/models/articles-models');
-const articleRoute = require('./api/routes/articles-routes');
-const imageRoute = require('./api/routes/image-routes');
-const userRoute = require('./api/routes/user-routes');
-
 // connect mongodb
 mongoose.connect(
 	'mongodb://damocolos:damocolos@blog-shard-00-00-q6tv7.mongodb.net:27017,blog-shard-00-01-q6tv7.mongodb.net:27017,blog-shard-00-02-q6tv7.mongodb.net:27017/blog?ssl=true&replicaSet=Blog-shard-0&authSource=admin', 
 	{
   		useMongoClient: true,
-  	/* other options */
+  		/* other options */
 	}
 );
 
 mongoose.Promise = global.Promise;
 
 app.get('/', function(req, res) {
-	res.send('hello world!');
+	res.status(200).json({
+		name: 'DAMO SERVER',
+		version: 1.0.0,
+		framework: 'express'
+	});
 });
 
 app.use('/api/articles', articleRoute);
 app.use('/user', userRoute);
+
+// didn't work yet
 app.use('/image', imageRoute);
-
-// app.get('/api/articles', function(req,res){
-// 	Article.getArticles(function(err, articles){
-// 		if(err){ 
-// 			// console.log(err);
-// 			// res.json(err);
-// 			throw err;
-// 		}
-// 		res.status(200).json(
-// 			articles.map(data => {
-// 				return {
-// 					title: data.title,
-// 					image: data.image,
-// 					image_path: url + uploadPath + data.image,
-// 				}
-// 			})
-// 		);
-// 	});
-// 	// mongoose.articles.find();
-// })
-
-// app.post('/api/articles', upload.single('imageFile'), (req, res, next) => {
-// 	console.log("request file", req.file);
-// 	const article = new Article({
-// 		_id: new mongoose.Types.ObjectId(),
-// 		title: req.body.title,
-// 		image: req.file.filename
-// 	});	
-// 	article.save()
-// 	.then( result => {
-// 		console.log("result", result);
-// 	})
-// 	.catch(err => console.log("error", err));
-// 	res.status(201).json({
-// 		message: "Handling POST",
-// 		article: article
-// 	});
-// })
 
 app.listen(port);
 console.log('running on port ' + port);
