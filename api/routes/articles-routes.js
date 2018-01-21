@@ -21,7 +21,7 @@ const upload = multer({
 	storage: storage
 });
 
-router.get('/', auth, (req,res) => {
+router.get('/', (req,res) => {
 	Article.getArticles((err, articles) => {
 		if(err){ 
 			// console.log(err);
