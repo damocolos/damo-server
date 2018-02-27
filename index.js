@@ -9,6 +9,12 @@ const port = process.env.PORT || 3000;
 const articleRoute = require('./api/routes/articles-routes');
 const imageRoute = require('./api/routes/image-routes');
 const userRoute = require('./api/routes/user-routes');
+const memberRoute = require('./api/routes/member-routes');
+const depositRoute = require('./api/routes/deposit-routes');
+const creditRoute = require('./api/routes/credit-routes');
+const bookkeepingRoute = require('./api/routes/bookkeeping-routes');
+// const creditRoute = require('./api/routes/credit-routes');
+// const bookkeepingRoute = require('./api/routes/bookkeeping-routes');
 
 // domain url
 const url = 'https://damo-express-server.herokuapp.com/';
@@ -44,7 +50,8 @@ app.use((req, res, next)=>{
 
 // connect mongodb
 mongoose.connect(
-	'mongodb://damocolos:damocolos@blog-shard-00-00-q6tv7.mongodb.net:27017,blog-shard-00-01-q6tv7.mongodb.net:27017,blog-shard-00-02-q6tv7.mongodb.net:27017/blog?ssl=true&replicaSet=Blog-shard-0&authSource=admin', 
+    'mongodb://damocolos:damocolos@blog-shard-00-00-q6tv7.mongodb.net:27017,blog-shard-00-01-q6tv7.mongodb.net:27017,blog-shard-00-02-q6tv7.mongodb.net:27017/blog?ssl=true&replicaSet=Blog-shard-0&authSource=admin', 
+    // 'mongodb://127.0.0.1:27017/restapi',
 	{
   		useMongoClient: true,
   		/* other options */
@@ -63,6 +70,10 @@ app.get('/', function(req, res) {
 
 app.use('/api/articles', articleRoute);
 app.use('/user', userRoute);
+app.use('/api/members', memberRoute);
+app.use('/api/deposits', depositRoute);
+app.use('/api/credits', creditRoute);
+app.use('/api/bookkeepings', bookkeepingRoute);
 
 // didn't work yet
 app.use('/image', imageRoute);
