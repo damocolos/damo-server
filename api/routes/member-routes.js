@@ -21,56 +21,81 @@ router.get('/', (req, res) => {
                 error: err
             });
         });
-    // Members.getArticles((err, articles) => {
-    // 	if(err){ 
-    // 		throw err;
-    // 	}
-    // 	res.status(200).json(
-    // 		articles.map(data => {
-    // 			return {
-    // 				_id: data._id,
-    // 				title: data.title,
-    // 				image: data.image,
-    // 				image_path: url + uploadPath + data.image,
-    // 			}
-    // 		})
-    // 	);
-    // });
-    // mongoose.articles.find();
 })
 
-// router.post('/', auth, upload.single('imageFile'), (req, res, next) => {
-// 	console.log("request file", req.file);
-// 	const article = new Article({
-// 		_id: new mongoose.Types.ObjectId(),
-// 		title: req.body.title,
-// 		image: req.file.filename
-// 	});	
-// 	article.save()
-// 	.then( result => {
-// 		console.log("result", result);
-// 	})
-// 	.catch(err => console.log("error", err));
-// 	res.status(201).json({
-// 		message: "Handling POST",
-// 		article: article
-// 	});
-// });
+// create new
+router.post('/', (req, res, next) => {
+    const member = new Member({
+        _id: new mongoose.Types.ObjectId(),
+        nik: req.body.nik,
+        name: req.body.name,
+        gender: req.body.gender,
+        address: req.body.address,
+        city: req.body.city,
+        telp: req.body.telp,
+        email: req.body.email,
+        last_salary: req.body.last_salary,
+        salary_date: req.body.salary_date,
+        out_date: null,
+        management: req.body.management,
+        credits: [],
+        deposits: [],
+        created_at: new Date(),
+        updated_at: new Date()
+    });
+    member.save();
+    res.status(200).json(member);
+});
 
-// router.delete('/:id', auth, (req, res, next) => {
-// 	Article.remove({ _id: req.params.id })
-// 		.exec()
-// 		.then( result => {
-// 			res.status(200).json({
-// 				message: "article deleted"
-// 			});
-// 		})
-// 		.catch( err => {
-// 			res.status(500).json({
-// 				error: err
-// 			});
-// 		});
-// });
+// get single
+router.get('/:id', (req, res, next) => {
+    Member.findOne({
+            _id: req.params.id
+        })
+        .exec()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 
+// update
+router.put('/:id', (req, res, next) => {
+    Member.findById(req.params.id)
+        .then((model) => {
+            return Object.assign(model, req.body);
+        }).then((model) => {
+            return model.save();
+        }).then((updatedModel) => {
+            res.json({
+                msg: 'model updated',
+                updatedModel
+            });
+        }).catch((err) => {
+            res.send(err);
+        });
+});
+
+// delete
+router.delete('/:id', (req, res, next) => {
+    Member.remove({
+            _id: req.params.id
+        })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: "deleted"
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 
 module.exports = router;
